@@ -5,14 +5,27 @@
     <h5 class="card-title">{{bug.title}}</h5>
     <small>{{bug.creator}}</small>
     <p class="card-text"> {{bug.description}}</p>
+    <p>Closed: {{bug.closed}}</p>
   </div>
   <div class="card-body">
       <div v-for="comment in comments" :key="comment._id" class="list-group">
           <small class="list-group-item">{{comment.creator}}</small>
           <small class="list-group-item">{{comment.content}}</small>
+          <button @click="deleteComment(comment)">Delete</button>
       </div>
-      <!-- form here for adding comment, should @submit.prevent="addComment" on this form be sure to add a v-if="!bug.closed" -->
+    
+    <form v-if="!bug.closed" @submit.prevent="addComment">
+        <div class="form-group">
+            <label for="exampleInputEmail1"></label>
+            <input v-model="newComment.creator" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Your Name">
 
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1"></label>
+            <input v-model="newComment.content" class="form-control" id="exampleInputPassword1" placeholder="What bug is on your mind">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
       <button @click="deleteBug(id)">Complete</button>
   </div>
 </div>
@@ -53,15 +66,15 @@ import { setTimeout } from 'timers'
             deleteBug(id){
                 this.$store.dispatch('deleteBug', id)
             }, 
-            deleteComment(id){
-                this.$store.dispatch('deleteComment', id)
+            deleteComment(comment){
+                this.$store.dispatch('deleteComment', comment)
             },
             addComment(){
                 //grab data from v-models created in data
                 //dispatch addcomment
                 // ?? Is this right?  Goal is to get it all under one v-model
                 let data = {
-                            data: this.newComment(),
+                            data: this.newComment,
                             id: this.id
                 }
                 this.$store.dispatch('postComment', data)

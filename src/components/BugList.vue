@@ -2,7 +2,7 @@
   <div class="BugList d-flex justify-content-center">
     <div v-for="bug in bugs" :key="bug._id" class="card" style="width:275px">
       <div class="card-body">
-        <a @click="contents(bug._id)" class="card-title">{{bug.title}}</a>
+        <a @click="contents(bug._id)" class="card-title clickable">{{bug.title}}</a>
         <small v-if="bug.completed">Bug is completed</small>
         <p class="card-text">{{bug.description}}</p>
       </div>
@@ -41,5 +41,8 @@ export default {
 </script>
 
 <style scoped>
+.clickable{
+  cursor: pointer;
+}
 </style>
 
