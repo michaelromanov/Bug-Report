@@ -1,14 +1,13 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="">
     <div>
       <h3>Bug Creator</h3>
-      <bug-creator />
+      <BugCreator />
     </div>
     
     <div>
       <h3>Bug List</h3>
-      <bug-list />
+      <BugList />
     </div>
 
   </div>
