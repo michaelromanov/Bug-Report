@@ -22,11 +22,17 @@ export default {
   computed: {
       bugs(){
           return this.$store.state.bugs
+      }, 
+      livebugs(){
+
       }
   },
   methods: {
       contents(id){
           this.$store.dispatch("getContentsPage", id)
+      }, 
+      deletePost(data) {
+          this.$store.dispatch("deleteBug", data)
       }
   }
 

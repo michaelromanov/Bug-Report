@@ -12,10 +12,10 @@
           <small class="list-group-item">{{comment.content}}</small>
       </div>
       <!-- form here for adding comment, should @submit.prevent="addComment" on this form be sure to add a v-if="!bug.closed" -->
+
       <button @click="deleteBug(id)">Complete</button>
   </div>
 </div>
-
 
 </div>
 
@@ -53,25 +53,21 @@ import { setTimeout } from 'timers'
             deleteBug(id){
                 this.$store.dispatch('deleteBug', id)
             }, 
-            deleteComment(){
+            deleteComment(id){
                 this.$store.dispatch('deleteComment', id)
             },
             addComment(){
                 //grab data from v-models created in data
                 //dispatch addcomment
+                // ?? Is this right?  Goal is to get it all under one v-model
+                let data = {
+                            data: this.newComment(),
+                            id: this.id
+                }
+                this.$store.dispatch('postComment', data)
             }
         }
-        
-
-
-
-
-
-
-    
     }
-
-//5cfff7f596be050014b6c317
 </script>
 
 
