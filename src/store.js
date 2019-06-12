@@ -89,7 +89,13 @@ export default new Vuex.Store({
         console.error(er)
       })
     },
-
+    createBug({ commit, dispatch }, payload) {
+      api.post("bugs", payload)
+        .then(res => {
+          dispatch('getBugs')
+        })
+        .catch(err => console.error(err))
+    },
     deleteBug({commit, dispatch}, id){
       //this will be similar to get contents, but as a delete instead of a get
       //this is a dispatch not a commit
